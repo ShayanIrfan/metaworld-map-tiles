@@ -984,7 +984,7 @@ describe('when fetching update data', () => {
     })
 
     it('should return a batched list of tiles, parcels and estates to update', () => {
-      return expect(apiComponent.fetchUpdatedData(100000, {})).resolves.toEqual(
+      return expect(apiComponent.fetchUpdatedData(100000, {})).resolves?.toEqual(
         {
           tiles: [
             defaultParcelTile,
