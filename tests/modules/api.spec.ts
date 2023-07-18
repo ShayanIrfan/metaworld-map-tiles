@@ -370,7 +370,7 @@ describe('when fetching data', () => {
     })
 
     it('should return the tiles, the parcels and the estates', () => {
-      return expect(apiComponent.fetchData()).resolves.toEqual({
+      return expect(apiComponent.fetchData()).resolves?.toEqual({
         tiles: [
           defaultParcelTile,
           defaultFstParcelEstateTile,
