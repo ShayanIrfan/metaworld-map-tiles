@@ -31,4 +31,4 @@ src/data
 tests/**/*.spec.js
 coverage
 dist
-.env
+# .env
