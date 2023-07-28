@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node --trace-warnings --abort-on-uncaught-exception --unhandled-rejections=strict dist/index.js",
     "start:dev": "nodemon src/index.ts",
-    "build": "tsc",
     "test": "jest"
   },
   "prettier": {
