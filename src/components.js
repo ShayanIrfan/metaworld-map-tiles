@@ -64,29 +64,25 @@ const mini_map_renderer_1 = require('./adapters/mini-map-renderer')
 const fs = require('fs')
 
 async function initComponents() {
-  async function setEnvVariable(key, value) {
-    // Load the current .env file content
-    const envFilePath = '.env.defaults'
-    let envFileContent = fs.readFileSync(envFilePath, 'utf8')
+  // Load the current .env file content
+  const envFilePath = '.env.defaults'
+  let envFileContent = fs.readFileSync(envFilePath, 'utf8')
 
-    // Check if the variable already exists in the file
-    const envVariableRegex = new RegExp(`${key}=.*`, 'g')
-    if (envVariableRegex.test(envFileContent)) {
-      // If the variable exists, update its value
-      envFileContent = envFileContent.replace(
-        envVariableRegex,
-        `${key}=${value}`
-      )
-    } else {
-      // If the variable does not exist, add it to the end of the file
-      envFileContent += `\n${key}=${value}`
-    }
-
-    // Write the updated content back to the .env file
-    fs.writeFileSync(envFilePath, envFileContent, 'utf8')
+  // Check if the variable already exists in the file
+  const envVariableRegex = new RegExp(`HTTP_SERVER_PORT=.*`, 'g')
+  if (envVariableRegex.test(envFileContent)) {
+    // If the variable exists, update its value
+    envFileContent = envFileContent.replace(
+      envVariableRegex,
+      `HTTP_SERVER_PORT=${process.env.PORT || 80}`
+    )
+  } else {
+    // If the variable does not exist, add it to the end of the file
+    envFileContent += `\nHTTP_SERVER_PORT=${process.env.PORT || 80}`
   }
 
-  await setEnvVariable('HTTP_SERVER_PORT', process.env.PORT || 80)
+  // Write the updated content back to the .env file
+  fs.writeFileSync(envFilePath, envFileContent, 'utf8')
 
   const config = await (0, env_config_provider_1.createDotEnvConfigComponent)(
     { path: ['.env.defaults', '.env'] },
@@ -202,5 +198,5 @@ async function initComponents() {
     renderEstateMiniMap,
   }
 }
-
+initComponents()
 exports.initComponents = initComponents
