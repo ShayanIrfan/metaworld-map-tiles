@@ -202,5 +202,5 @@ async function initComponents() {
     renderEstateMiniMap,
   }
 }
-initComponents()
+
 exports.initComponents = initComponents
