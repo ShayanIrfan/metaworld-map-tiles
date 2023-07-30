@@ -68,17 +68,17 @@ async function initComponents() {
   const envFilePath = '.env.defaults'
   let envFileContent = fs.readFileSync(envFilePath, 'utf8')
 
+  const key = 'HTTP_SERVER_PORT',
+    value = process.env.PORT || 80
+
   // Check if the variable already exists in the file
-  const envVariableRegex = new RegExp(`HTTP_SERVER_PORT=.*`, 'g')
+  const envVariableRegex = new RegExp(`${key}=.*`, 'g')
   if (envVariableRegex.test(envFileContent)) {
     // If the variable exists, update its value
-    envFileContent = envFileContent.replace(
-      envVariableRegex,
-      `HTTP_SERVER_PORT=${process.env.PORT || 80}`
-    )
+    envFileContent = envFileContent.replace(envVariableRegex, `${key}=${value}`)
   } else {
     // If the variable does not exist, add it to the end of the file
-    envFileContent += `\nHTTP_SERVER_PORT=${process.env.PORT || 80}`
+    envFileContent += `\n${key}=${value}`
   }
 
   // Write the updated content back to the .env file
