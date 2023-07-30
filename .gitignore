@@ -30,4 +30,3 @@ node_modules/
 src/data
 tests/**/*.spec.js
 coverage
-.env
